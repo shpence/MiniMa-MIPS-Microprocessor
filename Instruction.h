@@ -105,3 +105,7 @@ struct Instruction {
 void toString(struct Instruction this, char *result);
 
 bool equal(struct Instruction a, struct Instruction b);
+
+struct Instruction newInstructionBlank();
+
+struct Instruction newInstruction(enum ID instruction_id, uint8_t rd, uint8_t rs, uint8_t rt, int32_t immediate, uint32_t jump_address, uint8_t shift_amount, char *label, char *branch_label);
