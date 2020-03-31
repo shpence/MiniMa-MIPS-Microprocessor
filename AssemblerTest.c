@@ -273,7 +273,7 @@ void test3Phase2() {
   };
 
   struct ArrayList *phase1_expectedL = fromArray(phase1_expected, 3);
-  struct ArrayList *phase2_expectedL = fromArray(phase2_expected, 4);
+  struct ArrayList *phase2_expectedL = fromArray(phase2_expected, 3);
 
   testHelperPhase2(phase1_expectedL, phase2_expectedL);
 
@@ -458,7 +458,7 @@ void test5Phase3() {
     0x00094025
   };
 
-  struct ArrayList *phase2_expectedL = fromArray(phase2_expected, 7);
+  struct ArrayList *phase2_expectedL = fromArray(phase2_expected, 4);
   testHelperPhase3(phase2_expectedL, phase3_expected);
   freeList(phase2_expectedL);
 }
@@ -729,8 +729,8 @@ void test8Phase2() {
     CreateOr(8,8, 1) //addu $t0, $t0, $at
   };
 
-  struct ArrayList *phase1_expectedL = fromArray(phase1_expected, 9);
-  struct ArrayList *phase2_expectedL = fromArray(phase2_expected, 9);
+  struct ArrayList *phase1_expectedL = fromArray(phase1_expected, 8);
+  struct ArrayList *phase2_expectedL = fromArray(phase2_expected, 8);
 
   testHelperPhase2(phase1_expectedL, phase2_expectedL);
 
