@@ -51,6 +51,8 @@ void testHelperPhase3(struct ArrayList *expectedP2, uint32_t expectedP3[]) {
   for(int i = 0; i < size(expectedP2); i++){
     assert(expectedP3[i] == translated[i]);
   }
+  
+  free(translated);
 }
 
 void test1Phase1() {
