@@ -1121,7 +1121,7 @@ void test13Phase1() {
     CreateAddu(17, 0, 9)
   };
 
-  struct ArrayList *inputL = fromArray(input, 1);
+  struct ArrayList *inputL = fromArray(input, 2);
   struct ArrayList *phase1_expectedL = fromArray(phase1_expected, 2);
 
   testHelperPhase1(inputL, phase1_expectedL);
