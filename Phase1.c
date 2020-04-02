@@ -60,6 +60,6 @@ void mal_to_tal(struct ArrayList *mals, struct ArrayList *tals) {
 		}
 
 		// if instruction is already TAL, add it to tals
-		else { addLast(tals, get(mals,i); }	
+		else { addLast(tals, get(mals,i)); }	
 	}
 }
