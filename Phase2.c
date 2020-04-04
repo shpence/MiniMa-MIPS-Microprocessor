@@ -3,7 +3,7 @@
 #include <string.h>
 
 void resolve_addresses(struct ArrayList* unresolved, uint32_t first_pc, struct ArrayList* resolved) {
-	struct ArrayList labels = newArrayList();
+	struct ArrayList* labels = newArrayList();
 	int pc = first_pc;
 
 	// gathering all the labels
@@ -23,12 +23,14 @@ void resolve_addresses(struct ArrayList* unresolved, uint32_t first_pc, struct A
 			int imm = 0;
 
 			for (int j = 0; j < labels->size; j++) {
-				if (strcmp(get(unresolved, i).label, get(labels, j).label) == 0) {
+				if (strcmp(get(unresolved, i).branch_label, get(labels, j).label) == 0) {
 					match = j;
 				}
 			}
 
-			imm = (get(labels, match).jump_address - (pc + 4)) / 4;
+			imm = get(labels, match).jump_address;
+			imm -= (pc + 4);
+			imm = imm/4;
 			struct Instruction inst = newInstruction(get(unresolved, i).instruction_id, get(unresolved, i).rd, get(unresolved, i).rs, get(unresolved, i).rt, imm, 0, 0, "", "");
 			addLast(resolved, inst);
 		}
