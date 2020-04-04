@@ -5,7 +5,7 @@ void mal_to_tal(struct ArrayList *mals, struct ArrayList *tals) {
 		enum ID id = get(mals,i).instruction_id; // get the id number at the start of the loop
 
 		// instruction is addiu
-		if (id == 7 && (-32768 > get(mals, i).immediate || get(mals, i).immediate > 65536)) {
+		if (id == 7 && (get(mals, i).immediate >= 65536 || get(mals, i).immediate <= -32768)) {
 			struct Instruction inst;
 			int shifted = get(mals, i).immediate >> 16; // upper 16 bits of the immediate
 			if (shifted > 0xFFFF0000) { shifted -= 0xFFFF0000; }
@@ -23,7 +23,7 @@ void mal_to_tal(struct ArrayList *mals, struct ArrayList *tals) {
 		}
 
 		// instruction is ori
-		else if (id == 8 && (-32768 > get(mals, i).immediate || get(mals, i).immediate > 65536)) {
+		else if (id == 8 && (get(mals, i).immediate >= 65536 || get(mals, i).immediate <= 0)) {
 			struct Instruction inst;
 			int shifted = get(mals, i).immediate >> 16; // upper 16 bits of the immediate
 			if (shifted > 0xFFFF0000) { shifted -= 0xFFFF0000; }
@@ -60,7 +60,7 @@ void mal_to_tal(struct ArrayList *mals, struct ArrayList *tals) {
 
 		// instruction is mov
 		else if (id == 12) {
-			struct Instruction inst = newInstruction(addu, get(mals, i).rd, 0, get(mals, i).rs, get(mals, i).rt, 0, 0, 0, get(mals, i).label, "");
+			struct Instruction inst = newInstruction(addu, get(mals, i).rd, get(mals, i).rs, get(mals, i).rt, 0 , 0, 0, get(mals, i).label, "");
 			addLast(tals, inst);
 		}
 
