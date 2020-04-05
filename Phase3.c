@@ -13,7 +13,7 @@ uint32_t binary_to_int(char c[]) {
 
 // used for 5-bit register numbers
 char* int_to_binary5(int x) {
-	char c[5];
+	char c[5] = { '0', '0', '0', '0', '0' };
 	for (int i = 4; i > -1; i--) {
 		if (x - (1 << i) >= 0) {
 			c[4 - i] = '1';
@@ -27,23 +27,36 @@ char* int_to_binary5(int x) {
 
 // used for 16-bit immediates
 char* int_to_binary16(int x) {
-	char c[16];
-	for (int i = 15; i > -1; i--) {
-		if (x - (1 << i) >= 0) {
-			c[15 - i] = '1';
-			x -= (1 << i);
+	if (x < 0) {
+		char c[16] = { '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1' };
+		for (int i = 14; i > -1; i--) {
+			if (x + (1 << i) <= 0) {
+				c[15 - i] = '1';
+				x += (1 << i);
+			}
+			if (x == 0) { break; }
 		}
-		if (x == 0) { break; }
 	}
+	else {
+		char c[16] = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
+		for (int i = 15; i > -1; i--) {
+			if (x - (1 << i) >= 0) {
+				c[15 - i] = '1';
+				x -= (1 << i);
+			}
+			if (x == 0) { break; }
+		}
+	}
+	
 	char* str = c;
 	return str;
 }
 
 void translate_instructions(struct ArrayList *tals, uint32_t machineCode[]) {
-	for (int i = 0; i < tals->size; i++) {
-		struct Instruction inst = get(tals, i);
+	for (int j = 0; j < tals->size; j++) {
+		struct Instruction inst = get(tals, j);
 		enum ID id = inst.instruction_id;
-		char binary[32];
+		char binary[32] = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
 
 		// sll
 		if (id == 0) {
@@ -325,6 +338,6 @@ void translate_instructions(struct ArrayList *tals, uint32_t machineCode[]) {
 			}
 		}
 		
-		machineCode[i] = binary_to_int(binary);
+		machineCode[j] = binary_to_int(binary);
 	}
 }
