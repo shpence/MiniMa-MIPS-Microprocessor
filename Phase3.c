@@ -1,6 +1,6 @@
 #include "Phase3.h"
 
-uint32_t binary_to_int(char[] c) {
+uint32_t binary_to_int(char c[]) {
 	uint32_t x = 0;
 	for (int i = 31; i > -1; i--) {
 		if (c[31-i] == '1') { 
@@ -22,7 +22,7 @@ char* int_to_binary5(int x) {
 		if (x == 0) { break; }
 	}
 	char* str = c;
-	return c;
+	return str;
 }
 
 // used for 16-bit immediates
@@ -36,7 +36,7 @@ char* int_to_binary16(int x) {
 		if (x == 0) { break; }
 	}
 	char* str = c;
-	return c;
+	return str;
 }
 
 void translate_instructions(struct ArrayList *tals, uint32_t machineCode[]) {
@@ -194,7 +194,7 @@ void translate_instructions(struct ArrayList *tals, uint32_t machineCode[]) {
 				binary[i] = c[i - 11];
 			}
 
-			char* c = int_to_binary16(inst.immediate);
+			c = int_to_binary16(inst.immediate);
 			for (int i = 16; i < 32; i++) {
 				binary[i] = c[i - 16];
 			}
@@ -219,7 +219,7 @@ void translate_instructions(struct ArrayList *tals, uint32_t machineCode[]) {
 				binary[i] = c[i - 11];
 			}
 
-			char* c = int_to_binary16(inst.immediate);
+			c = int_to_binary16(inst.immediate);
 			for (int i = 16; i < 32; i++) {
 				binary[i] = c[i - 16];
 			}
@@ -244,7 +244,7 @@ void translate_instructions(struct ArrayList *tals, uint32_t machineCode[]) {
 				binary[i] = c[i - 11];
 			}
 
-			char* c = int_to_binary16(inst.immediate);
+			c = int_to_binary16(inst.immediate);
 			for (int i = 16; i < 32; i++) {
 				binary[i] = c[i - 16];
 			}
@@ -269,7 +269,7 @@ void translate_instructions(struct ArrayList *tals, uint32_t machineCode[]) {
 				binary[i] = c[i - 11];
 			}
 
-			char* c = int_to_binary16(inst.immediate);
+			c = int_to_binary16(inst.immediate);
 			for (int i = 16; i < 32; i++) {
 				binary[i] = c[i - 16];
 			}
@@ -294,7 +294,7 @@ void translate_instructions(struct ArrayList *tals, uint32_t machineCode[]) {
 				binary[i] = c[i - 11];
 			}
 
-			char* c = int_to_binary16(inst.immediate);
+			c = int_to_binary16(inst.immediate);
 			for (int i = 16; i < 32; i++) {
 				binary[i] = c[i - 16];
 			}
@@ -319,7 +319,7 @@ void translate_instructions(struct ArrayList *tals, uint32_t machineCode[]) {
 				binary[i] = c[i - 11];
 			}
 
-			char* c = int_to_binary16(inst.immediate);
+			c = int_to_binary16(inst.immediate);
 			for (int i = 16; i < 32; i++) {
 				binary[i] = c[i - 16];
 			}
