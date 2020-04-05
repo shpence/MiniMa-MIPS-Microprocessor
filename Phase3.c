@@ -30,12 +30,15 @@ char* int_to_binary16(int x) {
 	if (x < 0) {
 		char c[16] = { '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1' };
 		for (int i = 14; i > -1; i--) {
-			if (x + (1 << i) <= 0) {
-				c[15 - i] = '1';
+			if (x + (1 << i) <= -1) {
+				c[15 - i] = '0';
 				x += (1 << i);
 			}
-			if (x == 0) { break; }
+			if (x == -1) { break; }
 		}
+
+		char* str = c;
+		return str;
 	}
 	else {
 		char c[16] = { '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0' };
@@ -46,10 +49,13 @@ char* int_to_binary16(int x) {
 			}
 			if (x == 0) { break; }
 		}
+
+		char* str = c;
+		return str;
+		
 	}
 	
-	char* str = c;
-	return str;
+
 }
 
 void translate_instructions(struct ArrayList *tals, uint32_t machineCode[]) {
